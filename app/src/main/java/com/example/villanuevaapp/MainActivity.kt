@@ -5,10 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -43,6 +45,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+//nagcacall sa image at title
 @Composable
 fun VillanuevaApp() {
     MyApp(
@@ -50,45 +53,61 @@ fun VillanuevaApp() {
         imagePainter = painterResource(R.drawable.notes)
     )
 }
-
+//Image
 @Composable
 private fun MyApp(
+    //ito is for title "Note"
     title: String,
+    //ito naman para sa image, nag declare ng imagePainter para matawag ang image
     imagePainter: Painter,
     modifier: Modifier = Modifier
 
 ) {
+SelectionContainer {
     Column(modifier = modifier) {
-        Image(painter = imagePainter, contentDescription = null, modifier= Modifier.fillMaxWidth())
+        //nagdidisplay ng image,
+        Image(painter = imagePainter, contentDescription = null, modifier = Modifier.fillMaxWidth())
         Text(
-            text = title,
+            text = ("title"),
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp)
                 .weight(.1f)
                 .fillMaxWidth()
 
 
+        )
+        // tinatawag neto yung user input
+        SimpleFilledTextFieldSample(Modifier.weight(.8f))
+    }
+}
+}
+// kumukuha ng user input
+@Composable
+fun SimpleFilledTextFieldSample(modifier: Modifier) {
+    // nag declare ng variable na naghahandle ng text
+    var text by remember { mutableStateOf("") }
+    Column(modifier = modifier.fillMaxSize()) {
+//User input
+        TextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("What's on your mind?") },
+            modifier = modifier.fillMaxSize()
 
         )
-
-        SimpleFilledTextFieldSample( Modifier.weight(.8f))
+        Row(modifier = modifier.fillMaxSize()) {     //kapag nag input si user madidisplay dito, yung isNotEmpty meaning nakapaginput na si user
+            if (text.isNotEmpty()) {
+                Text(
+                    text = " Your output:$text",
+                    modifier = Modifier.fillMaxWidth().padding(top = 1.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
 
-@Composable
-fun SimpleFilledTextFieldSample(modifier: Modifier) {
-    var text by remember { mutableStateOf("") }
-
-    TextField(
-        value = text,
-        onValueChange = { text = it },
-        label = { Text("What's in your mind") },
-        modifier = modifier.fillMaxSize()
-
-    )
-}
-
-
+//cinocall neto yung buong app
 @Preview(showBackground = true)
 @Composable
 fun VillanuevaAppPreview() {
