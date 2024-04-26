@@ -69,7 +69,7 @@ SelectionContainer {
         //nagdidisplay ng image,
         Image(painter = imagePainter, contentDescription = null, modifier = Modifier.fillMaxWidth())
         Text(
-            text = ("title"),
+            text = "$title",
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp)
                 .weight(.1f)
@@ -108,7 +108,7 @@ fun SimpleFilledTextFieldSample(modifier: Modifier) {
         Column(modifier = modifier.fillMaxSize()) {     //kapag nag input si user madidisplay dito, yung isNotEmpty meaning nakapaginput na si user
             if (text.isNotEmpty()) {
                 Text(
-                    text = " Your output:$text",
+                    text = "$text",
                     modifier = Modifier.fillMaxWidth().padding(top = 1.dp),
                     textAlign = TextAlign.Center
                 )
@@ -117,7 +117,7 @@ fun SimpleFilledTextFieldSample(modifier: Modifier) {
     }
 }
 
-//cinocall neto yung buong app
+
 @Preview(showBackground = true)
 @Composable
 fun VillanuevaAppPreview() {
