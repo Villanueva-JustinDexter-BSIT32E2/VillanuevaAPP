@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -95,7 +96,16 @@ fun SimpleFilledTextFieldSample(modifier: Modifier) {
             modifier = modifier.fillMaxSize()
 
         )
-        Row(modifier = modifier.fillMaxSize()) {     //kapag nag input si user madidisplay dito, yung isNotEmpty meaning nakapaginput na si user
+        Row(modifier = Modifier.fillMaxWidth()) {
+            // Clear button
+            Button(
+                onClick = { text = "" },   //kapag clinick yung button mabubura ang user input
+                modifier = Modifier.weight(1f).padding(top = 8.dp)
+            ) {
+                Text("Clear")
+            }
+        }
+        Column(modifier = modifier.fillMaxSize()) {     //kapag nag input si user madidisplay dito, yung isNotEmpty meaning nakapaginput na si user
             if (text.isNotEmpty()) {
                 Text(
                     text = " Your output:$text",
