@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Button
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.villanuevaapp.ui.theme.VillanuevaAPPTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +74,7 @@ SelectionContainer {
         Text(
             text = "$title",
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(10.dp)
                 .weight(.1f)
                 .fillMaxWidth()
 
@@ -87,11 +90,14 @@ SelectionContainer {
 fun SimpleFilledTextFieldSample(modifier: Modifier) {
     // nag declare ng variable na naghahandle ng text
     var text by remember { mutableStateOf("") }
+
     Column(modifier = modifier.fillMaxSize()) {
 //User input
         TextField(
             value = text,
             onValueChange = { text = it },
+            singleLine = false,
+            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
             label = { Text("What's on your mind?") },
             modifier = modifier.fillMaxSize()
 
@@ -105,17 +111,10 @@ fun SimpleFilledTextFieldSample(modifier: Modifier) {
                 Text("Clear")
             }
         }
-        Column(modifier = modifier.fillMaxSize()) {     //kapag nag input si user madidisplay dito, yung isNotEmpty meaning nakapaginput na si user
-            if (text.isNotEmpty()) {
-                Text(
-                    text = "$text",
-                    modifier = Modifier.fillMaxWidth().padding(top = 1.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
     }
 }
+
+
 
 
 @Preview(showBackground = true)
